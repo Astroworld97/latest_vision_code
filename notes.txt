@@ -1,0 +1,1 @@
+avg HSV for green sticker = [66, 144, 213] 
