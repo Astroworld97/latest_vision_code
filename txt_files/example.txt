@@ -1,6 +1,0 @@
-(424, 512, 3)
-<class 'numpy.ndarray'>
-uint8
-(4, 2)
-<class 'numpy.ndarray'>
-int64

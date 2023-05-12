@@ -84,7 +84,7 @@ upper2 = np.array([190, 200, 250])
 angle_arr = []
 
 count = 0
-while count < 300:
+while count < 30:
     frames = listener.waitForNewFrame()
     color = frames["color"]
     depth = frames["depth"]
@@ -182,18 +182,12 @@ while count < 300:
 
     # plot and store blue points inside blue bounding box border
     for i in range(20):
-        # row1, row2 = minDistRows(largest_blue_box)
-        row1 = largest_blue_box[0][0]
-        row2 = largest_blue_box[2][0]
-        if row1 > row2:
-            row1, row2 = row2, row1
-        r = random.randint(int(row1), int(row2))
-        # col1, col2 = minDistCols(largest_blue_box)
-        col1 = largest_blue_box[0][1]
-        col2 = largest_blue_box[2][1]
-        if col1 > col2:
-            col1, col2 = col2, col1
-        c = random.randint(int(col1), int(col2))
+        min_row = min(point[0] for point in largest_blue_box)
+        max_row = max(point[0] for point in largest_blue_box)
+        min_col = min(point[1] for point in largest_blue_box)
+        max_col = max(point[1] for point in largest_blue_box)
+        r = random.randint(int(min_row), int(max_row))
+        c = random.randint(int(min_col), int(max_col))
         z = depth_channel[int(r), int(c)]
         toAdd = (r, c, z)
         colorDict[toAdd] = color1
@@ -232,18 +226,12 @@ while count < 300:
 
     # plot and store red points inside red bounding box border
     for i in range(20):
-        # row1, row2 = minDistRows(largest_red_box)
-        row1 = largest_red_box[0][0]
-        row2 = largest_red_box[2][0]
-        if row1 > row2:
-            row1, row2 = row2, row1
-        r = random.randint(int(row1), int(row2))
-        # col1, col2 = minDistCols(largest_red_box)
-        col1 = largest_red_box[0][1]
-        col2 = largest_red_box[2][1]
-        if col1 > col2:
-            col1, col2 = col2, col1
-        c = random.randint(int(col1), int(col2))
+        min_row = min(point[0] for point in largest_red_box)
+        max_row = max(point[0] for point in largest_red_box)
+        min_col = min(point[1] for point in largest_red_box)
+        max_col = max(point[1] for point in largest_red_box)
+        r = random.randint(int(min_row), int(max_row))
+        c = random.randint(int(min_col), int(max_col))
         z = depth_channel[int(r), int(c)]
         toAdd = (r, c, z)
         colorDict[toAdd] = color2
@@ -251,9 +239,9 @@ while count < 300:
 
     endpoints, corners = findEndPointsLineAndCorners(
         largest_blue_box, largest_red_box)
-    cv2.line(frame, endpoints[0], endpoints[1], (37, 65, 23), 2)
+    # cv2.line(frame, endpoints[0], endpoints[1], (37, 65, 23), 2)
     cv2.imwrite('video_test' + str(count) + '.jpg', frame)
-    out.write(frame)
+    # out.write(frame)
     # Exit on 'q' press
     # if cv2.waitKey(1) & 0xFF == ord('q'):
     #     break
@@ -308,13 +296,13 @@ while count < 300:
     # save the plot as a pdf
     # fig1.savefig('point_cloud_' + str(count) + '_in_pixels.pdf')
     # fig1.savefig('point_cloud_' + str(count) + '_in_pixels.png')
-    fig2.savefig('point_cloud_' + str(count) + '_in_meters.pdf')
-    fig2.savefig('point_cloud_' + str(count) + '_in_meters.png')
+    fig2.savefig('point_cloud_' + str(count) + '_in_inches.pdf')
+    fig2.savefig('point_cloud_' + str(count) + '_in_inches.png')
 
     colorDict_list.append(colorDict)
 
     # Open a file for writing
-    with open('exportDict.txt', 'w') as f:
+    with open('exportDict ' + str(count) + '.txt', 'w') as f:
         for key, value in exportDict.items():
             f.write('{}:{}\n'.format(key, value))
 
@@ -323,6 +311,7 @@ while count < 300:
 
     # Show the plot
     fig2.show()
+    plt.show()
     listener.release(frames)
 
     print(count)
