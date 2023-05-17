@@ -424,3 +424,135 @@
 #     x_grid = radius*np.cos(theta_grid) + center_x
 #     y_grid = radius*np.sin(theta_grid) + center_y
 #     return x_grid, y_grid, z_grid
+
+# plot and store blue points along blue bounding box border
+# for i in range(10):
+#     x0 = np.linspace(largest_blue_box[0][0], largest_blue_box[1][0], 10)[i]
+#     y0 = np.linspace(largest_blue_box[0][1], largest_blue_box[1][1], 10)[i]
+#     # z = depth_channel[int(y0), int(x0)]
+#     z = depth_channel[int(x0), int(y0)]
+#     colorDict[(x0, y0, z)] = color1
+#     # colorDict[(y0, x0, z)] = color1
+#     cv2.circle(frame, (int(x0), int(y0)), 2,
+#                (255, 0, 0), -1)  # BGR, not RGB
+#     x1 = np.linspace(largest_blue_box[1][0], largest_blue_box[2][0], 10)[i]
+#     y1 = np.linspace(largest_blue_box[1][1], largest_blue_box[2][1], 10)[i]
+#     z = depth_channel[int(x1), int(y1)]
+#     # z = depth_channel[int(y1), int(x1)]
+#     colorDict[(x1, y1, z)] = color1
+#     # colorDict[(y1, x1, z)] = color1
+#     cv2.circle(frame, (int(x1), int(y1)), 2, (255, 0, 0), -1)
+#     x2 = np.linspace(largest_blue_box[2][0], largest_blue_box[3][0], 10)[i]
+#     y2 = np.linspace(largest_blue_box[2][1], largest_blue_box[3][1], 10)[i]
+#     # z = depth_channel[int(y2), int(x2)]
+#     z = depth_channel[int(x2), int(y2)]
+#     colorDict[(x2, y2, z)] = color1
+#     # colorDict[(y2, x2, z)] = color1
+#     cv2.circle(frame, (int(x2), int(y2)), 2, (255, 0, 0), -1)
+#     x3 = np.linspace(largest_blue_box[3][0], largest_blue_box[0][0], 10)[i]
+#     y3 = np.linspace(largest_blue_box[3][1], largest_blue_box[0][1], 10)[i]
+#     # z = depth_channel[int(y3), int(x3)]
+#     z = depth_channel[int(x3), int(y3)]
+#     colorDict[(x3, y3, z)] = color1
+#     # colorDict[(y3, x3, z)] = color1
+#     cv2.circle(frame, (int(x3), int(y3)), 2, (255, 0, 0), -1)
+
+# plot and store red points along red bounding box border
+# for i in range(10):
+#     x0 = np.linspace(largest_red_box[0]
+#                      [0], largest_red_box[1][0], 10)[i]
+#     y0 = np.linspace(largest_red_box[0]
+#                      [1], largest_red_box[1][1], 10)[i]
+#     # z = depth_channel[int(y0), int(x0)]
+#     z = depth_channel[int(x0), int(y0)]
+#     colorDict[(x0, y0, z)] = color2
+#     # colorDict[(y0, x0, z)] = color2
+#     cv2.circle(frame, (int(x0), int(y0)), 2, (0, 0, 255), -1)
+#     x1 = np.linspace(largest_red_box[1]
+#                      [0], largest_red_box[2][0], 10)[i]
+#     y1 = np.linspace(largest_red_box[1]
+#                      [1], largest_red_box[2][1], 10)[i]
+#     # z = depth_channel[int(y1), int(x1)]
+#     z = depth_channel[int(x1), int(y1)]
+#     colorDict[(x1, y1, z)] = color2
+#     # colorDict[(y1, x1, z)] = color2
+#     cv2.circle(frame, (int(x1), int(y1)), 2, (0, 0, 255), -1)
+#     x2 = np.linspace(largest_red_box[2]
+#                      [0], largest_red_box[3][0], 10)[i]
+#     y2 = np.linspace(largest_red_box[2]
+#                      [1], largest_red_box[3][1], 10)[i]
+#     z = depth_channel[int(x2), int(y2)]
+#     # z = depth_channel[int(y2), int(x2)]
+#     colorDict[(x2, y2, z)] = color2
+#     # colorDict[(y2, x2, z)] = color2
+#     cv2.circle(frame, (int(x2), int(y2)), 2, (0, 0, 255), -1)
+#     x3 = np.linspace(largest_red_box[3]
+#                      [0], largest_red_box[0][0], 10)[i]
+#     y3 = np.linspace(largest_red_box[3]
+#                      [1], largest_red_box[0][1], 10)[i]
+#     # z = depth_channel[int(y3), int(x3)]
+#     z = depth_channel[int(x3), int(y3)]
+#     colorDict[(x3, y3, z)] = color2
+#     # colorDict[(y3, x3, z)] = color2
+#     cv2.circle(frame, (int(x3), int(y3)), 2, (0, 0, 255), -1)
+
+# Create an empty plot for xy pixel coordinates and z depth values in mm
+# fig1 = plt.figure()
+# ax1 = fig1.add_subplot(111, projection='3d')
+# keys = list(colorDict.keys())
+
+# Exit on 'q' press
+# if cv2.waitKey(1) & 0xFF == ord('q'):
+#     break
+
+# endpoints, corners = findEndPointsLineAndCorners(
+#     largest_blue_box, largest_red_box)
+# cv2.line(frame, endpoints[0], endpoints[1], (37, 65, 23), 2)
+
+# ax1.scatter(col, 424-row, z, c=color, marker='o')
+
+# print("Farthest red points: ", farthest_red_pts)
+# print("Distance between farthest red points: ",
+#       farthest_red_dist)
+# print("Num red points: ", len(red_points))
+
+# print("Farthest blue points: ", farthest_blue_pts)
+# print("Distance between farthest blue points: ",
+#       farthest_blue_dist)
+# print("Num blue points: ", len(blue_points))
+
+# print("Farthest blue points: ", farthest_blue_pts)
+# print("Distance between farthest blue points: ",
+#       farthest_blue_dist)
+# print("Num blue points: ", len(blue_points))
+
+# print("Farthest red points: ", farthest_red_pts)
+# print("Distance between farthest red points: ",
+#       farthest_red_dist)
+# print("Num red points: ", len(red_points))
+
+# color_data = color.asarray()
+# color_data = color_data[:, :, :3]
+# depth_data = depth.asarray(np.uint8)
+# extract the last channel which contains the depth information
+# depth_channel = depth_data[:, :, -1]
+
+# z = depth_channel[int(x), int(y)]
+# z = depth_channel[int(y), int(-x)]
+# toAdd = (x, y, z)
+
+# z = depth_channel[int(x), int(y)]
+# z = depth_channel[int(y), int(-x)]
+# toAdd = (x, y, z)
+
+# q_centroid = [0, 0, 300/2]
+# init_b = [q_centroid[0]-p_centroid[0], q_centroid[1] -
+#           p_centroid[1], q_centroid[2]-p_centroid[2]]
+# for i, point_p in enumerate(point_cloud_p):
+#     point_color = colorDictP[tuple(point_p)]
+#     colorDictP[tuple(point_p)] = ()
+#     point_p = [point_p[0]+init_b[0], point_p[1] +
+#                init_b[1], point_p[2]+init_b[2]]
+#     colorDictP[tuple(point_p)] = point_color
+#     point_cloud_p[i] = point_p
+# plot(point_cloud_p, colorDictP)

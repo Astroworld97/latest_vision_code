@@ -5,7 +5,7 @@ from pylibfreenect2 import Freenect2, SyncMultiFrameListener
 from pylibfreenect2 import FrameType, Registration, Frame
 from pylibfreenect2 import createConsoleLogger, setGlobalLogger
 from pylibfreenect2 import LoggerLevel
-from boundingBoxAngleKinect import *
+from helpers_kinect import *
 import random
 import matplotlib.pyplot as plt
 import colorsys
