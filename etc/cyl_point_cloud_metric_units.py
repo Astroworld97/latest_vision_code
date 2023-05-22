@@ -5,10 +5,11 @@ from pylibfreenect2 import Freenect2, SyncMultiFrameListener
 from pylibfreenect2 import FrameType, Registration, Frame
 from pylibfreenect2 import createConsoleLogger, setGlobalLogger
 from pylibfreenect2 import LoggerLevel
-# from helpers_kinect import *
 from collections import defaultdict
 from helpers import *
 import random
+import matplotlib as mpl
+mpl.use('tkagg')
 import matplotlib.pyplot as plt
 import colorsys
 import math
@@ -53,8 +54,8 @@ device.start()
 # dims_frame = cv2.imread('registered_frame.jpg', cv2.IMREAD_COLOR)
 # height, width, channels = dims_frame.shape
 fps = 30.0  # Frames per second
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter('output.mp4', fourcc, fps, (512, 424))
+# fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+# out = cv2.VideoWriter('output.mp4', fourcc, fps, (512, 424))
 
 # angle_arr, which will contain all the angles over the span of the camera being open
 angle_arr = []
@@ -143,8 +144,8 @@ while count < 1:
     largest_red_rect, largest_red_box = findLargestCurrRect(rect_dict_red)
 
     frame = np.ascontiguousarray(frame, dtype=np.uint8)
-    cv2.drawContours(frame, [largest_blue_box], 0, (255, 0, 0), 2)
-    cv2.drawContours(frame, [largest_red_box], 0, (0, 255, 0), 2)
+    # cv2.drawContours(frame, [largest_blue_box], 0, (255, 0, 0), 2)
+    # cv2.drawContours(frame, [largest_red_box], 0, (0, 0, 255), 2)
 
     # Define the colors for each half of the cylinder
 
@@ -152,7 +153,7 @@ while count < 1:
     color2 = (0.0, 1.0, 1.0)  # HSV values for red
 
     # plot and store blue points inside blue bounding box border
-    for i in range(60):
+    for i in range(1):
         min_x = min(point[0] for point in largest_blue_box)
         max_x = max(point[0] for point in largest_blue_box)
         min_y = min(point[1] for point in largest_blue_box)
@@ -163,17 +164,17 @@ while count < 1:
         colorDict[toAdd] = color1
         cv2.circle(frame, (int(x), int(y)), 2, (255, 0, 0), -1)
 
-    # plot and store red points inside red bounding box border
-    for i in range(60):
-        min_x = min(point[0] for point in largest_red_box)
-        max_x = max(point[0] for point in largest_red_box)
-        min_y = min(point[1] for point in largest_red_box)
-        max_y = max(point[1] for point in largest_red_box)
-        x = random.randint(int(min_x), int(max_x))
-        y = random.randint(int(min_y), int(max_y))
-        toAdd = (x, y)
-        colorDict[toAdd] = color2
-        cv2.circle(frame, (int(x), int(y)), 2, (0, 0, 255), -1)
+    # # plot and store red points inside red bounding box border
+    # for i in range(1):
+    #     min_x = min(point[0] for point in largest_red_box)
+    #     max_x = max(point[0] for point in largest_red_box)
+    #     min_y = min(point[1] for point in largest_red_box)
+    #     max_y = max(point[1] for point in largest_red_box)
+    #     x = random.randint(int(min_x), int(max_x))
+    #     y = random.randint(int(min_y), int(max_y))
+    #     toAdd = (x, y)
+    #     colorDict[toAdd] = color2
+    #     cv2.circle(frame, (int(x), int(y)), 2, (0, 0, 255), -1)
 
     cv2.imwrite('video_test' + str(count) + '.jpg', frame)
     # out.write(frame)
@@ -221,13 +222,14 @@ while count < 1:
     ax2.set_zlabel('Z')
 
     # save the plot as a pdf
-    fig2.savefig('point_cloud_' + str(count) + '_in_mm.pdf')
-    fig2.savefig('point_cloud_' + str(count) + '_in_mm.png')
+    fig2.savefig('output_image_folder/point_cloud_' + str(count) + '_in_mm.pdf')
+    fig2.savefig('output_image_folder/point_cloud_' + str(count) + '_in_mm.png')
 
     colorDict_list.append(colorDict)
 
     # Open a file for writing
-    with open('exportDict' + str(count) + '.txt', 'w') as f:
+    output_dict_folder = 'output_dict_folder/'
+    with open(output_dict_folder + 'exportDict' + str(count) + '.txt', 'w') as f:
         for key, value in exportDict.items():
             f.write('{}:{}\n'.format(key, value))
 
@@ -235,9 +237,20 @@ while count < 1:
 
     # Show the plots
     plt.show()
+    # fig2.show()
+
+    key = cv2.waitKey(delay=1)
+    if key == ord('q'):
+        break
+
     listener.release(frames)
 
     print(count)
     count += 1
 
-cv2.destroyAllWindows()
+# device.stop()
+# device.close()
+
+# sys.exit(0)
+
+# cv2.destroyAllWindows()

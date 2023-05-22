@@ -1,4 +1,4 @@
-from helpers_kinect import *
+from etc.helpers_kinect import *
 import matplotlib.pyplot as plt
 import colorsys
 

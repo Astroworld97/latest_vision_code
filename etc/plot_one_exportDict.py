@@ -1,5 +1,5 @@
 import numpy as np
-from helpers_kinect import *
+from etc.helpers_kinect import *
 import matplotlib.pyplot as plt
 import colorsys
 from icp_helpers_metric_units import *
