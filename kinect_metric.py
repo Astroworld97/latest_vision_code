@@ -179,7 +179,6 @@ while count < 1:
     print("First blue point: " + str(x) + " , " + str(y) + " , " + str(z))
     ax.scatter(x, y, z, c='blue', marker='o')
     exportDict[(x,y,z)] = color1
-    # ax.scatter(y, x, z, c='blue', marker='o')
     x, y, z = registration.getPointXYZ(undistorted, first_red_y, first_red_x)
     x = int(x*1000)  # convert meters to mm
     y = int(y*1000)  # convert meters to mm
@@ -187,7 +186,6 @@ while count < 1:
     print("First red point: " + str(x) + " , " + str(y) + " , " + str(z))
     ax.scatter(x, y, z, c='red', marker='o')
     exportDict[(x,y,z)] = color2
-    # ax.scatter(y, x, z, c='red', marker='o')
     second_blue_x = largest_blue_box[1][0]
     second_blue_y = largest_blue_box[1][1]
     print(second_blue_x)
@@ -241,7 +239,6 @@ while count < 1:
     print(fourth_red_x)
     print(fourth_red_y)
     x, y, z = registration.getPointXYZ(undistorted, fourth_blue_y, fourth_blue_x)
-    # x, y, z = registration.getPointXYZ(undistorted, fourth_blue_x, fourth_blue_y)
     x = int(x*1000)  # convert meters to mm
     y = int(y*1000)  # convert meters to mm
     z = int(z*1000)  # convert meters to mm
@@ -281,49 +278,83 @@ while count < 1:
     y_arr_red.append(int(second_red_y))
     y_arr_red.append(int(third_red_y))
     y_arr_red.append(int(fourth_red_y))
+
+    min_x_blue = min(x_arr_blue)
+    max_x_blue = max(x_arr_blue)
+    min_y_blue = min(y_arr_blue)
+    max_y_blue = max(y_arr_blue)
+    # print("Blue min x: " + str(min_x))
+    # print("Blue max x: " + str(max_x))
+    # print("Blue min y: " + str(min_y))
+    # print("Blue max y: " + str(max_y))
+    min_x_red = min(x_arr_red)
+    max_x_red = max(x_arr_red)
+    min_y_red = min(y_arr_red)
+    max_y_red = max(y_arr_red)
+    # print("Red min x: " + str(min_x))
+    # print("Red max x: " + str(max_x))
+    # print("Red min y: " + str(min_y))
+    # print("Red max y: " + str(max_y))
+
     # plot and store blue points inside blue bounding box border
-    for i in range(10):
-        min_x = min(x_arr_blue)
-        max_x = max(x_arr_blue)
-        min_y = min(y_arr_blue)
-        max_y = max(y_arr_blue)
-        print("Blue min x: " + str(min_x))
-        print("Blue max x: " + str(max_x))
-        print("Blue min y: " + str(min_y))
-        print("Blue max y: " + str(max_y))
-        rand_x = random.randint(int(min_x), int(max_x))
-        rand_y = random.randint(int(min_y), int(max_y))
-        x, y, z = registration.getPointXYZ(undistorted, rand_y, rand_x)
-        x = int(x*1000)  # convert meters to mm
-        y = int(y*1000)  # convert meters to mm
-        z = int(z*1000)  # convert meters to mm
+    for i in range(50):
+        alreadySeenPoint = True
+        while alreadySeenPoint:
+            rand_x = random.randint(int(min_x_blue), int(max_x_blue))
+            rand_y = random.randint(int(min_y_blue), int(max_y_blue))
+            x, y, z = registration.getPointXYZ(undistorted, rand_y, rand_x)
+            x = int(x*1000)  # convert meters to mm
+            y = int(y*1000)  # convert meters to mm
+            z = int(z*1000)  # convert meters to mm
+            if (x,y,z) not in exportDict:
+                alreadySeenPoint = False
         exportDict[(x,y,z)] = color1
         ax.scatter(x, y, z, c='blue', marker='o')
     
 
     # # plot and store red points inside red bounding box border
-    for i in range(10):
-        min_x = min(x_arr_red)
-        max_x = max(x_arr_red)
-        min_y = min(y_arr_red)
-        max_y = max(y_arr_red)
-        print("Red min x: " + str(min_x))
-        print("Red max x: " + str(max_x))
-        print("Red min y: " + str(min_y))
-        print("Red max y: " + str(max_y))
-        rand_x = random.randint(int(min_x), int(max_x))
-        rand_y = random.randint(int(min_y), int(max_y))
-        x, y, z = registration.getPointXYZ(undistorted, rand_y, rand_x)
-        x = int(x*1000)  # convert meters to mm
-        y = int(y*1000)  # convert meters to mm
-        z = int(z*1000)  # convert meters to mm
+    for i in range(50):
+        alreadySeenPoint = True
+        while alreadySeenPoint:
+            rand_x = random.randint(int(min_x_red), int(max_x_red))
+            rand_y = random.randint(int(min_y_red), int(max_y_red))
+            x, y, z = registration.getPointXYZ(undistorted, rand_y, rand_x)
+            x = int(x*1000)  # convert meters to mm
+            y = int(y*1000)  # convert meters to mm
+            z = int(z*1000)  # convert meters to mm
+            if (x,y,z) not in exportDict:
+                alreadySeenPoint = False
         exportDict[(x,y,z)] = color2
         ax.scatter(x, y, z, c='red', marker='o')
+
+        # plot and store blue points inside blue bounding box border
+    # for i in range(10):
+    #     rand_x = random.randint(int(min_x_blue), int(max_x_blue))
+    #     rand_y = random.randint(int(min_y_blue), int(max_y_blue))
+    #     x, y, z = registration.getPointXYZ(undistorted, rand_y, rand_x)
+    #     x = int(x*1000)  # convert meters to mm
+    #     y = int(y*1000)  # convert meters to mm
+    #     z = int(z*1000)  # convert meters to mm
+    #     exportDict[(x,y,z)] = color1
+    #     ax.scatter(x, y, z, c='blue', marker='o')
+    
+
+    # # # plot and store red points inside red bounding box border
+    # for i in range(10):
+    #     rand_x = random.randint(int(min_x_red), int(max_x_red))
+    #     rand_y = random.randint(int(min_y_red), int(max_y_red))
+    #     x, y, z = registration.getPointXYZ(undistorted, rand_y, rand_x)
+    #     x = int(x*1000)  # convert meters to mm
+    #     y = int(y*1000)  # convert meters to mm
+    #     z = int(z*1000)  # convert meters to mm
+    #     exportDict[(x,y,z)] = color2
+    #     ax.scatter(x, y, z, c='red', marker='o')
 
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
     ax.set_aspect("auto", "box")
+    # ax.set_aspect("equal", "box")
     plt.show()
 
     cv2.imwrite('output_image_folder/video_testing' + str(count) + '.jpg', frame)
