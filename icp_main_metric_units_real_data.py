@@ -3,9 +3,8 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from scipy.spatial.transform import Rotation
+# from scipy.spatial.transform import Rotation
 from numpy.linalg import eig
-# from icp_helpers_metric_units import *
 from helpers import *
 
 # main
@@ -23,7 +22,7 @@ modelBlueRange = [h-50, h]
 # section of analytical model that is red color tape; approximately equivalent to 2 inches (50.8 mm = 2 inches)
 modelRedRange = [0.00, 50]
 # section 2: define arrays (aka point clouds) and initialize dictionaries
-eliminate_nans()
+# eliminate_nans()
 colorDictP = txt_to_dict('exportDict0new.txt')
 point_cloud_p = list(colorDictP.keys())
 plot(point_cloud_p, colorDictP)

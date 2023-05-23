@@ -173,6 +173,8 @@ while count < 1:
     print(first_red_x)
     print(first_red_y)
     x, y, z = registration.getPointXYZ(undistorted, first_blue_y, first_blue_x)
+    # while(math.isnan(x) or math.isnan(y) or math.isnan(z)):
+    #     x, y, z = registration.getPointXYZ(undistorted, first_blue_y+.001, first_blue_x+.001)
     x = int(x*1000)  # convert meters to mm
     y = int(y*1000)  # convert meters to mm
     z = int(z*1000)  # convert meters to mm
@@ -180,6 +182,8 @@ while count < 1:
     ax.scatter(x, y, z, c='blue', marker='o')
     exportDict[(x,y,z)] = color1
     x, y, z = registration.getPointXYZ(undistorted, first_red_y, first_red_x)
+    # while(math.isnan(x) or math.isnan(y) or math.isnan(z)):
+    #     x, y, z = registration.getPointXYZ(undistorted, first_red_y+.001, first_red_x+.001)
     x = int(x*1000)  # convert meters to mm
     y = int(y*1000)  # convert meters to mm
     z = int(z*1000)  # convert meters to mm
@@ -195,6 +199,8 @@ while count < 1:
     print(second_red_x)
     print(second_red_y)
     x, y, z = registration.getPointXYZ(undistorted, second_blue_y, second_blue_x)
+    # while(math.isnan(x) or math.isnan(y) or math.isnan(z)):
+    #     x, y, z = registration.getPointXYZ(undistorted, second_blue_y+.001, second_blue_x+.001)
     x = int(x*1000)  # convert meters to mm
     y = int(y*1000)  # convert meters to mm
     z = int(z*1000)  # convert meters to mm
@@ -202,6 +208,8 @@ while count < 1:
     ax.scatter(x, y, z, c='blue', marker='o')
     exportDict[(x,y,z)] = color1
     x, y, z = registration.getPointXYZ(undistorted, second_red_y, second_red_x)
+    # while(math.isnan(x) or math.isnan(y) or math.isnan(z)):
+    #     x, y, z = registration.getPointXYZ(undistorted, second_red_y+.001, second_red_x+.001)
     x = int(x*1000)  # convert meters to mm
     y = int(y*1000)  # convert meters to mm
     z = int(z*1000)  # convert meters to mm
@@ -217,6 +225,8 @@ while count < 1:
     print(third_red_x)
     print(third_red_y)
     x, y, z = registration.getPointXYZ(undistorted, third_blue_y, third_blue_x)
+    # while(math.isnan(x) or math.isnan(y) or math.isnan(z)):
+    #     x, y, z = registration.getPointXYZ(undistorted, third_blue_y+.001, third_blue_x+.001)
     x = int(x*1000)  # convert meters to mm
     y = int(y*1000)  # convert meters to mm
     z = int(z*1000)  # convert meters to mm
@@ -224,6 +234,8 @@ while count < 1:
     ax.scatter(x, y, z, c='blue', marker='o')
     exportDict[(x,y,z)] = color1
     x, y, z = registration.getPointXYZ(undistorted, third_red_y, third_red_x)
+    # while(math.isnan(x) or math.isnan(y) or math.isnan(z)):
+    #     x, y, z = registration.getPointXYZ(undistorted, third_red_y+.001, third_red_x+.001)
     x = int(x*1000)  # convert meters to mm
     y = int(y*1000)  # convert meters to mm
     z = int(z*1000)  # convert meters to mm
@@ -239,6 +251,8 @@ while count < 1:
     print(fourth_red_x)
     print(fourth_red_y)
     x, y, z = registration.getPointXYZ(undistorted, fourth_blue_y, fourth_blue_x)
+    # while(math.isnan(x) or math.isnan(y) or math.isnan(z)):
+    #     x, y, z = registration.getPointXYZ(undistorted, fourth_blue_y+.001, fourth_blue_x+.001)
     x = int(x*1000)  # convert meters to mm
     y = int(y*1000)  # convert meters to mm
     z = int(z*1000)  # convert meters to mm
@@ -246,6 +260,8 @@ while count < 1:
     ax.scatter(x, y, z, c='blue', marker='o')
     exportDict[(x,y,z)] = color1
     x, y, z = registration.getPointXYZ(undistorted, fourth_red_y, fourth_red_x)
+    # while(math.isnan(x) or math.isnan(y) or math.isnan(z)):
+    #     x, y, z = registration.getPointXYZ(undistorted, fourth_blue_y+.001, fourth_blue_x+.001)
     x = int(x*1000)  # convert meters to mm
     y = int(y*1000)  # convert meters to mm
     z = int(z*1000)  # convert meters to mm
